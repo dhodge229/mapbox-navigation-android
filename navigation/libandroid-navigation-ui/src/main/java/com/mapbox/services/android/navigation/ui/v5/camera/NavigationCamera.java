@@ -33,13 +33,14 @@ import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
  */
 public class NavigationCamera implements ProgressChangeListener {
 
-  private static final int CAMERA_TILT = 45;
-  private static int CAMERA_ZOOM = 17;
+  public static final int CAMERA_TILT = 45;
+  public static int CAMERA_ZOOM = 17;
 
   private MapboxMap mapboxMap;
   private MapboxNavigation navigation;
 
-  private Location location;
+  public Location location;
+  public LatLng target;
   private double targetDistance;
   private boolean trackingEnabled = true;
 
@@ -253,7 +254,7 @@ public class NavigationCamera implements ProgressChangeListener {
       targetDistance, location.getBearing(), TurfConstants.UNIT_METERS
     );
 
-    LatLng target = new LatLng(
+    target = new LatLng(
       targetPosition.getLatitude(),
       targetPosition.getLongitude()
     );
