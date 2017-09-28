@@ -26,11 +26,13 @@ import com.mapbox.services.android.navigation.testapp.R;
 import com.mapbox.services.android.navigation.testapp.Utils;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.instruction.Instruction;
+import com.mapbox.services.android.navigation.v5.milestone.ApiMilestone;
 import com.mapbox.services.android.navigation.v5.milestone.MilestoneEventListener;
 import com.mapbox.services.android.navigation.v5.milestone.RouteMilestone;
 import com.mapbox.services.android.navigation.v5.milestone.Trigger;
 import com.mapbox.services.android.navigation.v5.milestone.TriggerProperty;
 import com.mapbox.services.android.navigation.v5.navigation.MapboxNavigation;
+import com.mapbox.services.android.navigation.v5.navigation.MapboxNavigationOptions;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationConstants;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationEventListener;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
@@ -87,18 +89,23 @@ public class MockNavigationActivity extends AppCompatActivity implements OnMapRe
     mapView.onCreate(savedInstanceState);
     mapView.getMapAsync(this);
 
-    navigation = new MapboxNavigation(this, Mapbox.getAccessToken());
+    MapboxNavigationOptions options = MapboxNavigationOptions.builder()
+      .defaultMilestonesEnabled(false).build();
 
-    navigation.addMilestone(new RouteMilestone.Builder()
-      .setIdentifier(BEGIN_ROUTE_MILESTONE)
-      .setInstruction(new BeginRouteInstruction())
-      .setTrigger(
-        Trigger.all(
-          Trigger.lt(TriggerProperty.STEP_INDEX, 3),
-          Trigger.gt(TriggerProperty.STEP_DISTANCE_TOTAL_METERS, 200),
-          Trigger.gte(TriggerProperty.STEP_DISTANCE_TRAVELED_METERS, 75)
-        )
-      ).build());
+    navigation = new MapboxNavigation(this, Mapbox.getAccessToken(), options);
+
+    navigation.addMilestone(new ApiMilestone.Builder().setIdentifier(1567).build());
+
+//    navigation.addMilestone(new RouteMilestone.Builder()
+//      .setIdentifier(BEGIN_ROUTE_MILESTONE)
+//      .setInstruction(new BeginRouteInstruction())
+//      .setTrigger(
+//        Trigger.all(
+//          Trigger.lt(TriggerProperty.STEP_INDEX, 3),
+//          Trigger.gt(TriggerProperty.STEP_DISTANCE_TOTAL_METERS, 200),
+//          Trigger.gte(TriggerProperty.STEP_DISTANCE_TRAVELED_METERS, 75)
+//        )
+//      ).build());
   }
 
   @OnClick(R.id.startRouteButton)
