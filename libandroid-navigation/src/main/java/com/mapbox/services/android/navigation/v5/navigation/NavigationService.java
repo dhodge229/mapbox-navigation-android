@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.mapbox.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.android.location.MockLocationEngine;
 import com.mapbox.services.android.navigation.R;
 import com.mapbox.services.android.navigation.v5.milestone.Milestone;
@@ -17,7 +18,6 @@ import com.mapbox.services.android.navigation.v5.routeprogress.RouteProgress;
 import com.mapbox.services.android.navigation.v5.utils.RingBuffer;
 import com.mapbox.services.android.telemetry.location.LocationEngine;
 import com.mapbox.services.android.telemetry.location.LocationEngineListener;
-import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
 
 import java.util.Arrays;
 import java.util.List;
