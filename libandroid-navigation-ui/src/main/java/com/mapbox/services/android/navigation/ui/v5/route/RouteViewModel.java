@@ -13,6 +13,7 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
 import com.mapbox.services.android.navigation.v5.navigation.MapboxNavigation;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationConstants;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
+import com.mapbox.services.api.directions.v5.DirectionsCriteria;
 import com.mapbox.services.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.services.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.services.api.directions.v5.models.LegStep;
@@ -95,7 +96,7 @@ public class RouteViewModel extends ViewModel implements Callback<DirectionsResp
   private void fetchRoute(Position origin, Position destination) {
     if (origin != null && destination != null) {
       NavigationRoute.Builder routeBuilder = NavigationRoute.builder()
-        .accessToken(Mapbox.getAccessToken())
+        .accessToken(Mapbox.getAccessToken()).profile(DirectionsCriteria.PROFILE_WALKING)
         .origin(origin)
         .destination(destination);
 
